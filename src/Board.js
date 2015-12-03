@@ -129,23 +129,6 @@
       }
 
       return result;
-
-
-      // var board = this.rows();
-
-      // for(var i = 0; i < board.length; i++) {
-      //   var count = 0;
-      //   for(j = 0; j < board.length; j++) {
-      //     if(board[j][i] === 1) {
-      //       count++;
-      //     }
-      //   }
-      //   if(count > 1){
-      //     return true;
-      //   }
-      // }
-
-      // return false; 
     },
 
 
@@ -155,11 +138,48 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      //check majorDiagonalColumnIndexAtFirstRow for 1
+        //if 1===true, 
+          //check next row+1index
+            //if row+1index =1, return true
+
+        //else return false;
+
+
+
+
       return false; // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+    
+      var board = this.rows();
+
+      for(var i = 0; i < board.length; i++){
+        
+        var row = board[i];
+        
+        for(var j = 0; j < row.length; j++){
+          
+          var item = row[j];
+
+          if(item === 1) {
+            var count = 0;
+            while(item !== undefined) {
+              if (board[i+1+count] && board[i + 1 + count][j + 1 + count] === 1) {
+                return true;
+              } else if (board[i+1+count]) {
+               item = board[i + 1 + count][j + 1 + count];
+               count++;
+              } else {
+                item = undefined;
+              }
+            } 
+          }
+        }
+      }
+
       return false; // fixme
     },
 
@@ -175,7 +195,37 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      
+
+      var board = this.rows();
+
+      for(var i = 0; i < board.length; i++){
+        
+        var row = board[i];
+        
+        for(var j = 0; j < row.length; j++){
+          
+          var item = row[j];
+
+          if(item === 1) {
+            var count = 0;
+            while(item !== undefined) {
+              if (board[i + 1 + count] && board[i + 1 + count][j - 1 - count] === 1) {
+                return true;
+              } else if (board[i + 1 + count]) {
+               item = board[i + 1 + count][j - 1 - count];
+               count++;
+              } else {
+                item = undefined;
+              }
+            } 
+          }
+        }
+      }
+
       return false; // fixme
+
+
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
